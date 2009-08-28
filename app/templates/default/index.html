@@ -1,7 +1,6 @@
-<h2>Weblets</h2>
+{% extends "../layout.html" %}
 
-
-Welcome aboard! 
+{% block body %}
 
 <p>
 	{% if login_url %}
@@ -11,9 +10,10 @@ Welcome aboard!
 	
 			{% if msg %}<p><i>{{ msg }}</i></p>{% endif %}
 	
-			Please choose your URL: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
+			Choose your URL: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
 			<input type="submit" value="Create" />
 		</form>
 		<a href="{{logout_url}}">logout</a>
 	{% endif %}
 </p>
+{% endblock %}
