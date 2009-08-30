@@ -3,10 +3,14 @@ from google.appengine.ext.webapp.util import login_required
 
 from lib.baseview import baseview
 from lib.webshell import *
+from lib.wrapper import *
 
 from models import *
 
 import urllib
+import logging
+import sys
+
 
 class DefaultHandler(baseview):
     '''    Homepage    '''
@@ -24,7 +28,7 @@ class DefaultHandler(baseview):
         else:
             tpl['logout_url'] = users.create_logout_url('/')
         
-        self.render_template('default/index.html', tpl)
+        self.render_template('index.html', tpl)
         
 
 class SourceHandler(baseview):
@@ -38,7 +42,7 @@ class SourceHandler(baseview):
         if script is None:
             self.error(404)
         else:
-            self.render_template('source/form.html', { 'script' : script, 'can_edit' : (users.get_current_user() == script.created_by) })
+            self.render_template('form.html', { 'script' : script, 'can_edit' : (users.get_current_user() == script.created_by) })
         
 
     def post(self, scriptname):
@@ -81,23 +85,38 @@ class SourceHandler(baseview):
 
 class RunHandler(baseview):
     '''
-    executes the actual script
+    executes the user script
     '''
-    
-    def get(self, scriptname):
-        script = Script.get_by_key_name(name_to_key(scriptname))
-        
+
+    def _loadscript(self, name):
+        script = Script.get_by_key_name(name_to_key(name))
         code = script.code.replace("\r", '').strip()
         
-        print 'executing: \n', code
+        self.namespace = { 
+                            'self': self
+                         }
 
-        exec code
+        prefix ='''import sys ; sys.modules['app'] = None ; sys.modules['google.appengine.ext'] = None \n'''
+        self.code = prefix + code
         
-    def post(self):
-        pass
+        
+    def get(self, scriptname):
+        self._loadscript(scriptname)
+        
+        code = self.code + "\nget()"
+        exec code in self.namespace
+        
+        
+    def post(self, scriptname):
+        self._loadscript(scriptname)
+        
+        code = self.code + "\npost()"
+        exec code in self.namespace
+
 
     def put(self):
         pass
+
     
     def delete(self):
         pass
