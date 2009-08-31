@@ -101,7 +101,11 @@ class RunHandler(baseview):
 
         prefix ='''import sys ; sys.modules['app'] = None ; sys.modules['google.appengine.ext'] = None \n'''
         code = prefix + code + "\n\n" + method + "()"
-        exec code in namespace
+        try:
+            exec code in namespace
+        except Exception, err:
+            self.error(500)
+            self.render("ERROR: %s \n" % err)
         
         
     def get(self, scriptname):

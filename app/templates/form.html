@@ -15,14 +15,17 @@
 	}
 	
 	function run_get() {
-		$.get('/{{script.name}}', 
-					$("#params").val(), 
-					function(data){ display_test(data) }
-					)
+		$.ajax({
+					url : '/{{script.name}}', 
+					type: 'GET',
+					data: $("#params").val(), 
+					dataType: 'text',
+					complete: function(xhr, status){ display_test(xhr, status) }
+					})
 	}
 	
-	function display_test(results){
-		$("#test_results").html('<textarea cols="120" rows="30">' + results + '</textarea>')
+	function display_test(xhr, status){
+		$("#test_results").html('<textarea cols="120" rows="30">' + xhr.responseText + '</textarea>')
 	}
 	
 	$(document).ready(function(){
