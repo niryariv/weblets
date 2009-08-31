@@ -8,3 +8,5 @@
 * Show header in test results
 
 * Weblets.lib (easy_install to dir?)
+
+* Clean up validations - move to the model

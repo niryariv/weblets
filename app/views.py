@@ -2,7 +2,7 @@ from google.appengine.api import users
 from google.appengine.ext.webapp.util import login_required
 
 from lib.baseview import baseview
-from lib.webshell import *
+from lib.utils import *
 from lib.wrapper import *
 
 from models import *
@@ -20,7 +20,7 @@ class DefaultHandler(baseview):
                 'msg' : self.request.get('msg'),
                 'scriptname' : self.request.get('scriptname'),
                 'logged_in'  : (users.get_current_user() is not None),
-                'home_url'   : self.request.url
+                'home_url'   : 'http://' + self.request.host + "/"
               }
 
         if users.get_current_user() is None:
@@ -51,6 +51,7 @@ class SourceHandler(baseview):
             
         scriptname = self.request.get('scriptname')
 
+        # clean this up - move validations to the Model
         err = scriptname_error(scriptname)
         if err is not None:
             self.redirect("/?%s" % urllib.urlencode({ 'msg' : err, 'scriptname' : scriptname }))
