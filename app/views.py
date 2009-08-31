@@ -88,48 +88,33 @@ class RunHandler(baseview):
     executes the user script
     '''
 
-    def _loadscript(self, name):
-        script = Script.get_by_key_name(name_to_key(name))
+    def _execute(self, scriptname, method):
+        script = Script.get_by_key_name(name_to_key(scriptname))
         if script is None:
-            return False
+            return self.error(404)
 
         code = script.code.replace("\r", '').strip()
         
-        self.namespace = { 
-                            'self': self
-                         }
+        namespace = { 
+                        'self': self
+                    }
 
         prefix ='''import sys ; sys.modules['app'] = None ; sys.modules['google.appengine.ext'] = None \n'''
-        self.code = prefix + code
-        return True
+        code = prefix + code + "\n\n" + method + "()"
+        exec code in namespace
         
         
     def get(self, scriptname):
-        if not self._loadscript(scriptname):
-            return self.error(404)
-        
-        code = self.code + "\nget()"
-        exec code in self.namespace
+        self._execute(scriptname, 'get')
         
         
     def post(self, scriptname):
-        if not self._loadscript(scriptname):
-            return self.error(404)
-        
-        code = self.code + "\npost()"
-        exec code in self.namespace
+        self._execute(scriptname, 'post')
 
 
     def put(self, scriptname):
-        if not self._loadscript(scriptname):
-            return self.error(404)
+        self._execute(scriptname, 'put')
 
-        code = self.code + "\nput()"
-        exec code in self.namespace
     
     def delete(self, scriptname):
-        if not self._loadscript(scriptname):
-            return self.error(404)
-
-        code = self.code + "\ndelete()"
-        exec code in self.namespace
+        self._execute(scriptname, 'delete')
