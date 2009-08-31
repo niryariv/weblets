@@ -90,6 +90,9 @@ class RunHandler(baseview):
 
     def _loadscript(self, name):
         script = Script.get_by_key_name(name_to_key(name))
+        if script is None:
+            return False
+
         code = script.code.replace("\r", '').strip()
         
         self.namespace = { 
@@ -98,25 +101,35 @@ class RunHandler(baseview):
 
         prefix ='''import sys ; sys.modules['app'] = None ; sys.modules['google.appengine.ext'] = None \n'''
         self.code = prefix + code
+        return True
         
         
     def get(self, scriptname):
-        self._loadscript(scriptname)
+        if not self._loadscript(scriptname):
+            return self.error(404)
         
         code = self.code + "\nget()"
         exec code in self.namespace
         
         
     def post(self, scriptname):
-        self._loadscript(scriptname)
+        if not self._loadscript(scriptname):
+            return self.error(404)
         
         code = self.code + "\npost()"
         exec code in self.namespace
 
 
-    def put(self):
-        pass
+    def put(self, scriptname):
+        if not self._loadscript(scriptname):
+            return self.error(404)
 
+        code = self.code + "\nput()"
+        exec code in self.namespace
     
-    def delete(self):
-        pass
+    def delete(self, scriptname):
+        if not self._loadscript(scriptname):
+            return self.error(404)
+
+        code = self.code + "\ndelete()"
+        exec code in self.namespace
