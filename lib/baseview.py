@@ -82,7 +82,8 @@ class baseview(webapp.RequestHandler):
             
         return out
         
-    def render_json(self, data):
+    def render_json(self, data, indent=None, callback=None):
+        ''' render a json response. indent is 0/1/2/etc identation level, callback is for JSONP callbacks'''
         clean_data = data
         
         if hasattr(data, '__module__') and data.__module__ == 'app.models':
@@ -93,6 +94,10 @@ class baseview(webapp.RequestHandler):
             for i in data:
                 clean_data.append(self.db_to_dict(i))
 
-        self.render(simplejson.dumps(clean_data), 'application/json')
+        json_out = simplejson.dumps(clean_data, indent=indent)
+        if callback is not None:
+            json_out = "%s( %s )" % (callback, json_out)
+            
+        self.render(json_out, 'application/json')
         
         
