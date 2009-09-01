@@ -1,12 +1,12 @@
 
-* Script name, description
-
+* "Saving..." indication
 * "make private/public"
+* textarea -> div if user not logged in
 
-* Test run as popup?
+? textile for docs
+? Source highlighting
+? Test run as popup?
 
 * Show header in test results
-
-* Weblets.lib (easy_install to dir?)
 
 * Clean up validations - move to the model
