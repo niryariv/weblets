@@ -9,7 +9,15 @@
 
 	function save(callback_func) {
 		$.post( '/_source/{{script.name}}', 
-						{ code: $("#code").val(), docs: $("#docs").val(), _method: 'put', format: 'xhr'},
+						{ 
+								code: $("#code").val(), 
+								docs: $("#docs").val(),
+								pretty_name: $("#pretty-name").val(),
+								description: $("#description").val(),
+								
+								_method: 'put', 
+								format: 'xhr'
+						},
 						callback_func
 						);
 	}
@@ -58,6 +66,13 @@
 <form action="/_source/{{script.name}}" method="post" name="info">
 	
 	<table align="center" width="80%" border="0" cellpadding="0"> <!-- free yourselves from CSS! -->
+		<tr>
+			<td colspan="3">
+				Name:<input type="text" size="20" id="pretty-name" value="{{ script.pretty_name }}" name="pretty_name">
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				Description:<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
+			</td>
+		</tr>
 		<tr>
 			<td align="left">
 				<h2>Source for <tt>{{script.name}}</tt></h2>
