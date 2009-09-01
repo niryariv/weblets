@@ -3,7 +3,9 @@ from google.appengine.ext import db
 
 class Script(db.Model):
     name  = db.StringProperty   (required=True)
-    
+    pretty_name = db.StringProperty   (required=False, default='')
+    description   = db.StringProperty   (required=False, default='')
+
     code  = db.TextProperty     (required=False, default='')
     docs  = db.TextProperty     (required=False, default='')
     
@@ -16,4 +18,4 @@ class Script(db.Model):
         return ("s_%s" % scriptname)
 
     def key_to_name(self, scriptname):
-        return scriptname[2:]
+            return scriptname[2:]
