@@ -1,9 +1,9 @@
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import login_required
 
-from lib.baseview import baseview
-from lib.utils import *
-from lib.wrapper import *
+from app.lib.baseview import baseview
+from app.lib.utils import *
+from app.lib.wrapper import *
 
 from models import *
 

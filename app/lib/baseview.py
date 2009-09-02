@@ -69,7 +69,7 @@ class baseview(webapp.RequestHandler):
         path is the template's location inside app/templates (eg, for a template in "app/templates/hello/index.html" path would be "hello/index.html")
         Template variables can be either passed as dictionary to render() or stored in self.tmpl
         '''
-        template_path = os.path.join(os.path.dirname(__file__), '..', 'app', 'templates', path)
+        template_path = os.path.join(os.path.dirname(__file__), '..', 'templates', path)
         self.render(template.render(template_path, tmpl_vars))
     
 

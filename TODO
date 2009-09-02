@@ -1,4 +1,7 @@
 
+Form
+====
+
 * "Saving..." indication
 * "make private/public"
 * textarea -> div if user not logged in
@@ -9,4 +12,14 @@
 
 * Show header in test results
 
+Homepage
+--------
+
+* recent scripts
+
+* "your scripts"
+
+
+Backend
+=======
 * Clean up validations - move to the model
