@@ -89,9 +89,13 @@
 				<textarea name="code" id="code" cols="75" rows="30" {% if not can_edit %} readonly="readonly" {% endif %}>{{script.code}}</textarea>
 			</td>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-			<td align="right">
+			<td valign="top">
 				<h2><tt>{{script.name}}</tt> Docs</h2>
-				<textarea name="docs" id="docs" cols="75" rows="30" {% if not can_edit %} readonly="readonly" {% endif %}>{{script.docs}}</textarea>
+				{% if can_edit %}
+					<textarea name="docs" id="docs" cols="75" rows="30">{{script.docs}}</textarea>
+				{% else %}
+					{{ textile_docs }}
+				{% endif %}
 			</td>
 		</tr>
 		<tr>
