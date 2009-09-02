@@ -4,7 +4,11 @@
 	{% block head %}{% endblock %}
 </head>
 <body>
-	<span style="font-size: 30px"><a href="/">Weblets</a></span> <span style="font-size: 12px">are nice</span>
+	<p>
+		<span style="font-size: 30px"><a href="/">Weblets</a></span> <span style="font-size: 12px">are nice</span>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		({% if logged_in %}<a href="{{logout_url}}" />log out</a>{% else %}<a href="{{logout_url}}" />log in</a> to create your own{% endif %})
+	</p>
 
 {% block body %}{% endblock %}
 

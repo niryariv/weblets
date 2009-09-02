@@ -38,11 +38,23 @@ class SourceHandler(baseview):
 
     def get(self, scriptname):
         script = Script.get_by_key_name(name_to_key(scriptname))
+        
+        tpl =  { 
+                'script'    : script, 
+                'can_edit'  : (users.get_current_user() == script.created_by),
+                'logged_in' : (users.get_current_user() is not None)
+                }
+        
+        if users.get_current_user() is None:
+            tpl['login_url']  = users.create_login_url('/')
+        else:
+            tpl['logout_url'] = users.create_logout_url('/')
+        
 
         if script is None:
             self.error(404)
         else:
-            self.render_template('form.html', { 'script' : script, 'can_edit' : (users.get_current_user() == script.created_by) })
+            self.render_template('form.html', tpl)
         
 
     def post(self, scriptname):
