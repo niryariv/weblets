@@ -8,6 +8,9 @@
 	<script type="text/javascript">
 
 	function save(callback_func) {
+		
+	{% if can_edit %} 
+		
 		$.post( '/_source/{{script.name}}', 
 						{ 
 								code: $("#code").val(), 
@@ -20,6 +23,12 @@
 						},
 						callback_func
 						);
+		
+	{% else %}
+		
+		callback_func();
+		
+	{% endif %}
 	}
 	
 	function run_get() {
@@ -48,7 +57,7 @@
 
 		// save and execute
 		$("#run").click(function () { 
-			save( function()(window.location = "/{{script.name}}") );
+			save( function()(window.location = "/{{script.name}}?" + $("#params").val() ));
 		});
 
 		// test run locally
