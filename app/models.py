@@ -3,7 +3,6 @@ from google.appengine.ext import db
 
 class Script(db.Model):
     name  = db.StringProperty   (required=True)
-    pretty_name = db.StringProperty   (required=False, default='')
     description   = db.StringProperty   (required=False, default='')
 
     code  = db.TextProperty     (required=False, default='')

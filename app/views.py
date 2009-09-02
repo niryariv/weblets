@@ -48,9 +48,9 @@ class SourceHandler(baseview):
                 }
         
         if users.get_current_user() is None:
-            tpl['login_url']  = users.create_login_url('/')
+            tpl['login_url']  = users.create_login_url('/_source/%s' % scriptname)
         else:
-            tpl['logout_url'] = users.create_logout_url('/')
+            tpl['logout_url'] = users.create_logout_url('/_source/%s' % scriptname)
         
 
         if script is None:
@@ -78,7 +78,6 @@ class SourceHandler(baseview):
     def put(self, scriptname):
         code = self.request.get('code', '')
         docs = self.request.get('docs', '')
-        pretty_name = self.request.get('pretty_name', '')
         description = self.request.get('description', '')
         
         format = self.request.get('format')
@@ -94,7 +93,6 @@ class SourceHandler(baseview):
         else:
             script.code = code
             script.docs = docs
-            script.pretty_name = pretty_name
             script.description = description
             script.put()
             if format != 'xhr': 
