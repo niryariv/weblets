@@ -15,7 +15,7 @@
 						{ 
 								code: $("#code").val(), 
 								docs: $("#docs").val(),
-								pretty_name: $("#pretty-name").val(),
+								listable: $("#listable").is(':checked'),
 								description: $("#description").val(),
 								
 								_method: 'put', 
@@ -77,18 +77,24 @@
 	<table align="center" width="80%" border="0" cellpadding="0"> <!-- free yourselves from CSS! -->
 		<tr>
 			<td colspan="3">
-				Description:<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
+				<span style="font-size: 20px"><tt>{{script.name}}</tt></span>&nbsp;&nbsp;&nbsp;&nbsp;
+				{% if logged_in %}
+					<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
+				{% else %}
+					{{script.description}}
+				{% endif %}
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Listable 
+				<br /><br />
 			</td>
 		</tr>
 		<tr>
 			<td align="left">
-				<h2>Source for <tt>{{script.name}}</tt></h2>
 				<input type="hidden" name="_method" value="put" />
 				<textarea name="code" id="code" cols="75" rows="30" {% if not can_edit %} readonly="readonly" {% endif %}>{{script.code}}</textarea>
 			</td>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 			<td valign="top">
-				<h2><tt>{{script.name}}</tt> Docs</h2>
 				{% if can_edit %}
 					<textarea name="docs" id="docs" cols="75" rows="30">{{script.docs}}</textarea>
 				{% else %}

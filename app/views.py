@@ -78,8 +78,10 @@ class SourceHandler(baseview):
     def put(self, scriptname):
         code = self.request.get('code', '')
         docs = self.request.get('docs', '')
-        description = self.request.get('description', '')
         
+        description = self.request.get('description', '')
+        listable = self.request.get('listable', default_value='false')
+
         format = self.request.get('format')
         
         script = Script.get_by_key_name(name_to_key(scriptname))
@@ -94,6 +96,8 @@ class SourceHandler(baseview):
             script.code = code
             script.docs = docs
             script.description = description
+            script.listable = (listable == "true")
+                
             script.put()
             if format != 'xhr': 
                 self.redirect('/_source/%s' % scriptname)
