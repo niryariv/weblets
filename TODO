@@ -3,10 +3,7 @@ Form
 ====
 
 * "Saving..." indication
-* "make private/public"
-* textarea -> div if user not logged in
 
-? textile for docs
 ? Source highlighting
 ? Test run as popup?
 
@@ -23,3 +20,7 @@ Homepage
 Backend
 =======
 * Clean up validations - move to the model
+
+* Create custom cache class
+
+* Module import security
