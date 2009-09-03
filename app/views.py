@@ -39,6 +39,9 @@ class SourceHandler(baseview):
 
     def get(self, scriptname):
         script = Script.get_by_key_name(name_to_key(scriptname))
+
+        if script is None:
+            return self.error(404)
         
         tpl =  { 
                 'script'    : script, 
@@ -52,11 +55,7 @@ class SourceHandler(baseview):
         else:
             tpl['logout_url'] = users.create_logout_url('/_source/%s' % scriptname)
         
-
-        if script is None:
-            self.error(404)
-        else:
-            self.render_template('form.html', tpl)
+        self.render_template('form.html', tpl)
         
 
     def post(self, scriptname):

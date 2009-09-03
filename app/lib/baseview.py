@@ -63,6 +63,20 @@ class baseview(webapp.RequestHandler):
             
         self.response.out.write(output)
         
+    def error(self, error_code, tmpl_vars={}, text=None, quiet=False):
+        # self.render_template(('errors/%s.html'% error_code), tmpl_vars)
+        super(baseview, self).error(error_code)
+        if quiet: return
+        
+        if text is not None:
+            self.render(text)
+        else:
+            try: 
+                self.render_template(('errors/%s.html'% error_code), tmpl_vars)
+            except: # TODO: catch TemplateDoesNotExist
+                return
+            
+        
     def render_template(self, path, tmpl_vars={}):
         '''
         Renders a template.
