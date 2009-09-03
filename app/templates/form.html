@@ -110,7 +110,7 @@
 				{% if logged_in %}
 					<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
 				{% else %}
-					{{script.description}}
+					{{script.description|escape}}
 				{% endif %}
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Listable 

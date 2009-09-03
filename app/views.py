@@ -83,13 +83,16 @@ class SourceHandler(baseview):
 
         format = self.request.get('format')
         
+        docs = docs.replace('<', '&lt;')
+        docs = docs.replace('>', '&gt;')
+        
         script = Script.get_by_key_name(name_to_key(scriptname))
 
-        if users.get_current_user() != script.created_by:
-            self.error(500)
-            
-        elif script is None:
+        if script is None:
             self.error(404)
+
+        elif users.get_current_user() != script.created_by:
+            self.error(500)
 
         else:
             script.code = code
