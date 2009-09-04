@@ -3,8 +3,8 @@ Form
 ====
 
 * "Saving..." indication
+* Support GET/POST/PUT/DELETE drop down
 
-? Source highlighting
 ? Test run as popup?
 
 * Show header in test results

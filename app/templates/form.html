@@ -15,7 +15,7 @@
 		$.post( '/_source/{{script.name}}', 
 						{ 
 								code: editor.getCode(), //$("#code").val(), 
-								docs: $("#docs").val(),
+								docs: $("#docs-editbox").val(),
 								listable: $("#listable").is(':checked'),
 								description: $("#description").val(),
 								
@@ -107,13 +107,12 @@
 
 	<div id="button-bar">
 		<p>
-			{% if can_edit %}<input type="button" value="Save" id="save" />{% endif %}
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" value="Run" id="run" />
+			<button id="save" type="button" {% if not can_edit %}disabled="true"{% endif %}>Save</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<tt>GET /{{script.name}}?</tt><input type="text" size="20" id="params">
-			<input type="button" value="Test" id="test" />
-			<br />
+			<button type="button" id="test" />Save &amp; Run</button>
+			<button type="button" id="run" /><img src="/static/img/external.png" /></button>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 		</p>
 	</div>
 
@@ -129,7 +128,7 @@
 	<div id="docs-div">
 		<p>
 			{% if can_edit %}
-				<textarea name="docs" id="docs" cols="75" rows="30">{{script.docs}}</textarea>
+				<textarea id="docs-editbox">{{script.docs}}</textarea>
 			{% else %}
 				{{ textile_docs }}
 			{% endif %}
