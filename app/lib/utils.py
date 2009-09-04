@@ -1,7 +1,7 @@
 from google.appengine.api import users
 from app.models import *
-import urllib
 
+import urllib
 import allowed_users
 
 # def require_login(url):
@@ -39,7 +39,7 @@ def scriptname_error(scriptname):
     
 def allowed_user(user):
     try:
-        i = allowed_users.ALLOWED_USERS.index(user.email())
+        i = allowed_users.ALLOWED_USERS.index(user.email().lower())
         return True
     except:
         return False

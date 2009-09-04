@@ -1,0 +1,62 @@
+/*.main{  margin:0 auto; width:960px; }*/
+
+/*.dp50{ width:50%; float:left; display: inline; *margin-right:-1px; }*/
+
+
+p{ padding:0 14px 0 0; }
+input { 
+    border: 1px solid;
+    background-color: #ffffd0;
+}
+
+.clear{ clear:both; }
+
+.CodeMirror-line-numbers {
+  width: 2.2em;
+  color: #aaa;
+  background-color: #eee;
+  text-align: right;
+  padding: .4em;
+  margin: 0;
+  font-family: monospace;
+  font-size: 10pt;
+  line-height: 1.1em;
+}
+
+body {
+    margin:25px 50px;
+    font-family: verdana;
+}
+
+#button-bar {
+    text-align: center;
+    width: 100%;
+/*    background-color: #ddd;*/
+}
+
+#topbar {
+    width: 100%;
+/*    background-color: #ddd;*/
+}
+
+#code-div { 
+    width:50%;
+    height: 450px;
+    float:left; 
+    display: inline; 
+    *margin-right:-1px; 
+}
+
+#spacer {
+    width:15px; 
+    float:left; 
+    display: inline; 
+    *margin-right:-1px;     
+}
+
+#docs-div {
+    width:40%; 
+    float:left; 
+    display: inline; 
+    *margin-right:-1px; 
+}
