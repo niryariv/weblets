@@ -61,7 +61,7 @@
 	function display_test(xhr, status){
 		$("#test_results").html('<textarea cols="120" rows="30">' + xhr.responseText + '</textarea>')
 	}
-	
+
 	$(document).ready(function(){
 		
 		// enable tabs inside textareas
@@ -78,12 +78,16 @@
 		});
 
 		// test run locally
+		$("#form").submit(function() {
+			save(function ()(run_get()) );
+			return false;
+		});
 		$("#test").click(function () { 
 			save(function ()(run_get()) );
 		});
 
 		editor = CodeMirror.fromTextArea('code', {
-			{% if not can_edit %} readonly: true, {% endif %}
+			{% if not can_edit %} readOnly: true, {% endif %}
 			parserfile: ["parsepython.js"],
 			stylesheet: "/static/css/pythoncolors.css",
 			path: "/static/js/codemirror/",
@@ -101,19 +105,19 @@
 	
 	{% block body %}
 
-<form action="/_source/{{script.name}}" method="post" name="info">
+<form action="/_source/{{script.name}}" method="post" name="info" id="form">
 	
 	<table align="center" width="80%" border="1" cellpadding="0"> <!-- free yourselves from CSS! -->
 		<tr>
 			<td colspan="3">
 				<span style="font-size: 20px"><tt>{{script.name}}</tt></span>&nbsp;&nbsp;&nbsp;&nbsp;
-				{% if logged_in %}
+				{% if can_edit %}
 					<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Listable 
 				{% else %}
 					{{script.description|escape}}
 				{% endif %}
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Listable 
 				<br /><br />
 			</td>
 		</tr>

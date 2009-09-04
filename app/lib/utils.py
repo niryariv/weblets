@@ -1,5 +1,8 @@
 from google.appengine.api import users
+from app.models import *
+import urllib
 
+import allowed_users
 
 # def require_login(url):
 #     if users.get_current_user() is None:
@@ -18,8 +21,6 @@ def key_to_name(scriptname):
 
 
 def scriptname_error(scriptname):
-    from app.models import *
-    import urllib
 
     if not (2 < len(scriptname) < 20):
         return("Name must be between 3 to 20 characters")
@@ -34,4 +35,17 @@ def scriptname_error(scriptname):
         return("Name must consist of URL-valid characters only")
 
     return None
+    
+    
+def allowed_user(user):
+    try:
+        i = allowed_users.ALLOWED_USERS.index(user.email())
+        return True
+    except:
+        return False
+
+
+def can_edit(user, script):
+    return (allowed_user(user.email()) and user.email() == script.created_by)
+    
     

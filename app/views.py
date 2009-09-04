@@ -12,6 +12,16 @@ import urllib
 import logging
 import sys
 
+class ImportTest(baseview):
+    def get(self):
+        import app.lib.import_watch as impwatch
+        impwatch.activate()
+
+        import urllib2
+        from google.appengine.ext import db
+
+        self.render (str(urllib2))
+        
 
 class DefaultHandler(baseview):
     '''    Homepage    '''
@@ -21,6 +31,7 @@ class DefaultHandler(baseview):
                 'msg' : self.request.get('msg'),
                 'scriptname' : self.request.get('scriptname'),
                 'logged_in'  : (users.get_current_user() is not None),
+                'allowed_user': allowed_user(users.get_current_user()),
                 'home_url'   : 'http://' + self.request.host + "/"
               }
 
@@ -44,6 +55,7 @@ class SourceHandler(baseview):
             return self.error(404)
         
         tpl =  { 
+                'user'      : users.get_current_user(),
                 'script'    : script, 
                 'can_edit'  : (users.get_current_user() == script.created_by),
                 'logged_in' : (users.get_current_user() is not None),
@@ -59,8 +71,8 @@ class SourceHandler(baseview):
         
 
     def post(self, scriptname):
-        if users.get_current_user() is None:
-            return self.render('Please <a href="%s">login</a> to create a script' % users.create_login_url('/'))
+        if not allowed_user(users.get_current_user()):
+            return self.error(401)
             
         scriptname = self.request.get('scriptname')
 
@@ -89,20 +101,19 @@ class SourceHandler(baseview):
         script = Script.get_by_key_name(name_to_key(scriptname))
 
         if script is None:
-            self.error(404)
+            return self.error(404)
 
-        elif users.get_current_user() != script.created_by:
-            self.error(500)
+        if users.get_current_user() != script.created_by:
+            return self.error(401)
 
-        else:
-            script.code = code
-            script.docs = docs
-            script.description = description
-            script.listable = (listable == "true")
-                
-            script.put()
-            if format != 'xhr': 
-                self.redirect('/_source/%s' % scriptname)
+        script.code = code
+        script.docs = docs
+        script.description = description
+        script.listable = (listable == "true")
+            
+        script.put()
+        if format != 'xhr': 
+            self.redirect('/_source/%s' % scriptname)
 
 
 

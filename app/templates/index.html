@@ -3,9 +3,7 @@
 {% block body %}
 
 <p>
-	{% if login_url %}
-		To create your own script, <a href="{{login_url}}">login</a>
-	{% else %}
+		{% if allowed_user %}
 		<form action="/_source/c" method="post">
 	
 			{% if msg %}<p><i>{{ msg }}</i></p>{% endif %}
@@ -13,7 +11,8 @@
 			Choose your URL: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
 			<input type="submit" value="Create" />
 		</form>
-		<a href="{{logout_url}}">logout</a>
-	{% endif %}
+		{% else %}
+		To get an account and create your own scripts, email niryariv@gmail.com
+		{% endif %}
 </p>
 {% endblock %}
