@@ -13,9 +13,9 @@ class Script(db.Model):
     updated_at  = db.DateTimeProperty (auto_now=True)
     
     created_by  = db.UserProperty (auto_current_user=True)
-    
-    def name_to_key(self, scriptname):
-        return ("s_%s" % scriptname)
-
-    def key_to_name(self, scriptname):
-            return scriptname[2:]
+    # 
+    # def name_to_key(self, scriptname):
+    #     return ("s_%s" % scriptname)
+    # 
+    # def key_to_name(self, scriptname):
+    #         return scriptname[2:]

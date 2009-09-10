@@ -3,6 +3,13 @@
 /*.dp50{ width:50%; float:left; display: inline; *margin-right:-1px; }*/
 
 
+body {
+    margin:25px 50px;
+    color:#222;
+    background:#fff;
+    font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
 p{ padding:0 14px 0 0; }
 input { 
     border: 1px solid;
@@ -23,10 +30,6 @@ input {
   line-height: 1.1em;
 }
 
-body {
-    margin:25px 50px;
-    font-family: verdana;
-}
 
 #button-bar {
     text-align: center;

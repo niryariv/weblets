@@ -159,3 +159,32 @@ class RunHandler(baseview):
     
     def delete(self, scriptname):
         self._execute(scriptname, 'delete')
+
+
+class ExportHandler(baseview):
+    ''' Export datastore contents in CSV format'''
+
+    def get(self):
+        import csv
+
+        props = Script.properties()
+        rows = [props.keys()]            
+        
+        for s in Script.all().fetch(1000):
+            fields = []
+            for p in props:
+                data = str(getattr(s,p))
+                data = data.replace("\n", "\\n")
+                fields.append(data)
+            
+            rows.append(fields)
+            
+        self.response.headers["Content-Type"] = 'text/plain'
+        writer = csv.writer(self.response.out)
+
+        for item in rows:
+            writer.writerow(item)        
+        
+        
+        
+        

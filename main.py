@@ -26,8 +26,9 @@ from app.views import *
 
 def main():
   application = webapp.WSGIApplication([
-                                        ('/import', ImportTest),
+                                        ('/import', ImportTest), # testing
                                         ('/', DefaultHandler),
+                                        ('/_export', ExportHandler),
                                         ('/_source/(.*)', SourceHandler),
                                         ('/(.*)', RunHandler)
                                         ],

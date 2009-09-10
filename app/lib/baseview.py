@@ -59,7 +59,7 @@ class baseview(webapp.RequestHandler):
 
     def render(self, output, content_type=None):
         if content_type is not None:
-            self.response.headers["Content-Type"] = 'Content-type: %s' % content_type
+            self.response.headers["Content-Type"] = content_type
             
         self.response.out.write(output)
         
