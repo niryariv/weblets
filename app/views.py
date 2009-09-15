@@ -1,7 +1,7 @@
 from google.appengine.api import users
 from google.appengine.ext.webapp.util import login_required
 
-from app.lib.baseview import baseview
+from gaet.baseview import baseview
 from app.lib.utils import *
 from app.lib.wrapper import *
 from app.lib import textile

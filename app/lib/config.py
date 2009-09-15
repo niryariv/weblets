@@ -1,0 +1,1 @@
+ALLOWED_USERS = ['niryariv@gmail.com', 'test@example.com']
