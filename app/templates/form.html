@@ -32,10 +32,10 @@
 	{% endif %}
 	}
 	
-	function run_get() {
+	function run_script(method) {
 		$.ajax({
 					url : '/{{script.name}}', 
-					type: 'GET',
+					type: method,
 					data: $("#params").val(), 
 					dataType: 'text',
 					complete: function(xhr, status){ display_test(xhr, status) }
@@ -48,7 +48,7 @@
 	}
 
 	$(document).ready(function(){
-		
+				
 		// enable tabs inside textareas
 		$("textarea").tabby();
 		
@@ -64,11 +64,11 @@
 
 		// test run locally
 		$("#form").submit(function() {
-			save(function ()(run_get()) );
+			save(function ()(run_script($('#method').val())) );
 			return false;
 		});
 		$("#test").click(function () { 
-			save(function ()(run_get()) );
+			save(function ()(run_script($('#method').val())) );
 		});
 
 		editor = CodeMirror.fromTextArea('code', {
@@ -109,7 +109,13 @@
 		<p>
 			<button id="save" type="button" {% if not can_edit %}disabled="true"{% endif %}>Save</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<tt>GET /{{script.name}}?</tt><input type="text" size="20" id="params">
+			<select name="method" id="method">
+				<option selected="selected">GET</option>
+				<option>POST</option>
+				<option>PUT</option>
+				<option>DELETE</option>
+			</select>
+			<tt>/{{script.name}}?</tt><input type="text" size="20" id="params">
 			<button type="button" id="test" />Save &amp; Run</button>
 			<button type="button" id="run" /><img src="/static/img/external.png" /></button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
