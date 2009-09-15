@@ -167,23 +167,24 @@ class ExportHandler(baseview):
     def get(self):
         import csv
 
-        props = Script.properties()
-        rows = [props.keys()]            
+        props = Script.properties().keys()
+        rows = [props.append('aaaa')]
         
         for s in Script.all().fetch(1000):
-            fields = []
+            fields = [s.key()]
             for p in props:
                 data = str(getattr(s,p))
                 data = data.replace("\n", "\\n")
                 fields.append(data)
-            
+
             rows.append(fields)
             
         self.response.headers["Content-Type"] = 'text/plain'
         writer = csv.writer(self.response.out)
 
-        for item in rows:
-            writer.writerow(item)        
+        print rows
+        # for item in rows:
+        #     writer.writerow(item)        
         
         
         
