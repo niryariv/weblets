@@ -44,11 +44,19 @@
 	var editor;
 	
 	function display_test(xhr, status){
-		$("#test_results").html('<textarea cols="120" rows="30">' + xhr.responseText + '</textarea>')
+		$("#test-div").show(400);		
+		$("#results-display").html(xhr.responseText)
 	}
 
 	$(document).ready(function(){
 				
+		// handle the test results area
+		$("#test-div").hide();
+		
+		$("#results-close").click(function (){
+			$("#test-div").hide(400);
+		});
+		
 		// enable tabs inside textareas
 		$("textarea").tabby();
 		
@@ -122,6 +130,14 @@
 		</p>
 	</div>
 
+	<div class="clear"></div>
+	<div id="test-div">
+			<button id="results-close" type="button">close</button><br />
+			<textarea id="results-display"></textarea>
+	</div>
+
+	<div class="clear"></div>
+
 	<div id="code-div">
 		<p>
 			<input type="hidden" name="_method" value="put" />
@@ -141,13 +157,11 @@
 		</p>
 	</div>
 	
-	<div class="clear"></div>
 	
 	<div id="footer">
 		<!-- someday, there will be a footer here -->
 	</div>
 	
-	<div id="test_results"></div>
 
 </form>
 {% endblock %}
