@@ -38,8 +38,10 @@
 					type: method,
 					data: $("#params").val(), 
 					dataType: 'text',
-					complete: function(xhr, status){ display_test(xhr, status) }
-					})
+					complete: function(xhr, status){ 
+						display_test(xhr, status);
+					}
+		})
 	}
 	var editor;
 	
