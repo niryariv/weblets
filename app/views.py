@@ -28,6 +28,7 @@ class DefaultHandler(baseview):
         
         script_list = Script.all()
         script_list.filter('listable', True)
+        script_list.order('-updated_at')
         
         tpl = { 
                 'msg' : self.request.get('msg'),

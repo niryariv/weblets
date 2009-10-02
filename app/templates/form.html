@@ -11,7 +11,7 @@
 
 	function save(callback_func) {
 		{% if can_edit %} 
-		$("#save").html('Saving... <img src="/static/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
+		$("#save").html('Saving... <img src="/static/img/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
 		$.post( '/_source/{{script.name}}', 
 						{ 
 								code: editor.getCode(), //$("#code").val(), 
