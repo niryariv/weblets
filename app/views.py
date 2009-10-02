@@ -4,7 +4,6 @@ from google.appengine.ext.webapp.util import login_required
 from gaet.baseview import baseview
 from app.lib.utils import *
 from app.lib.wrapper import *
-from app.lib import textile
 
 from models import *
 
@@ -59,7 +58,6 @@ class SourceHandler(baseview):
                 'script'    : script, 
                 'can_edit'  : (users.get_current_user() == script.created_by),
                 'logged_in' : (users.get_current_user() is not None),
-                'textile_docs' : textile.textile(script.docs)
                 }
         
         if users.get_current_user() is None:

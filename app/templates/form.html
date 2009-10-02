@@ -5,13 +5,12 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript"></script>
 	<script src="/static/js/jquery.textarea.js" type="text/javascript"></script>
   <script src="/static/js/codemirror/codemirror.js" type="text/javascript"></script>
+  <script src="/static/js/showdown.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
 
 	function save(callback_func) {
-		
-	{% if can_edit %} 
-		
+		{% if can_edit %} 
 		$.post( '/_source/{{script.name}}', 
 						{ 
 								code: editor.getCode(), //$("#code").val(), 
@@ -25,11 +24,11 @@
 						callback_func
 						);
 		
-	{% else %}
+			{% else %}
 		
-		callback_func();
+			callback_func();
 		
-	{% endif %}
+			{% endif %}
 	}
 	
 	function run_script(method) {
@@ -51,12 +50,33 @@
 	}
 
 	$(document).ready(function(){
+		var showdown = new Showdown.converter();
 				
 		// handle the test results area
 		$("#test-div").hide();
 		
 		$("#results-close").click(function (){
 			$("#test-div").hide(400);
+		});
+		
+		//edit docs
+		$("#docs-edit").hide();
+		$("#docs-text").show();		
+		html = showdown.makeHtml($("#docs-editbox").val());
+		$("#docs-text").html(html);
+		
+		$("#docs-div").click(function (){
+			$("#docs-edit").show();
+			$("#docs-text").hide();
+			$("#docs-editbox").focus();
+		});
+
+		$("#docs-editbox").blur(function (){
+			save();
+			html = showdown.makeHtml($("#docs-editbox").val());
+			$("#docs-text").html(html);
+			$("#docs-text").show();
+			$("#docs-edit").hide();
 		});
 		
 		// enable tabs inside textareas
@@ -152,11 +172,12 @@
 	<div id="docs-div">
 		<p>
 			{% if can_edit %}
-				<textarea id="docs-editbox">{{script.docs}}</textarea>
-				<a href="http://textile.thresholdstate.com/" target="_blank"><tt>Textile reference</tt></a>
-			{% else %}
-				{{ textile_docs }}
+				<span id="docs-edit">
+					<textarea id="docs-editbox">{{script.docs}}</textarea>
+					<a href="http://daringfireball.net/projects/markdown/basics" target="_blank"><tt>Markdown Reference</tt></a>
+				</span>
 			{% endif %}
+			<span id="docs-text">&nbsp;</span>
 		</p>
 	</div>
 	
