@@ -27,7 +27,8 @@ class DefaultHandler(baseview):
     def get(self):
         
         script_list = Script.all()
-                
+        script_list.filter('listable', True)
+        
         tpl = { 
                 'msg' : self.request.get('msg'),
                 'scriptname' : self.request.get('scriptname'),
