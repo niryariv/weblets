@@ -11,6 +11,7 @@
 
 	function save(callback_func) {
 		{% if can_edit %} 
+		$("#save").html("Saving...");
 		$.post( '/_source/{{script.name}}', 
 						{ 
 								code: editor.getCode(), //$("#code").val(), 
@@ -21,8 +22,11 @@
 								_method: 'put', 
 								format: 'xhr'
 						},
-						callback_func
-						);
+						function(){ 
+							$("#save").html("Save"); 
+							callback_func();
+						}
+					);
 		
 			{% else %}
 		
@@ -81,10 +85,14 @@
 		
 		// save on change
 		$("#description").blur( function() {
-			if ($("#description").val() != '') save();
+			save();
 		});
 		
 		$("#listable").click( function() {
+			save();
+		});
+		
+		$("#code").blur( function() {
 			save();
 		});
 		
@@ -97,10 +105,10 @@
 			save();
 		});
 
-		// save and execute
-		$("#run").click(function () { 
-			save( function()(window.location = "/{{script.name}}?" + $("#params").val() ));
-		});
+		// // save and execute
+		// $("#run").click(function () { 
+		// 	save( function()(window.location = "/{{script.name}}?" + $("#params").val() ));
+		// });
 
 		// test run locally
 		$("#form").submit(function() {
@@ -120,7 +128,8 @@
 			textWrapping: false,
 			indentUnit: 4,
 			width: "100%", height: "95%",
-			parserConfig: {'pythonVersion': 2, 'strictErrors': true}
+			parserConfig: {'pythonVersion': 2, 'strictErrors': true},
+			onChange: save
     });
 
 	});
