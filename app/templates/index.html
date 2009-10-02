@@ -15,4 +15,8 @@
 		<!-- To get an account and create your own scripts, email niryariv@gmail.com -->
 		{% endif %}
 </p>
+<p>
+	{% for s in script_list %}
+		<tt><b><a href="/_source/{{ s.name }}">{{ s.name }}</a></b>&nbsp;:&nbsp;{{ s.description }}</tt><br/>
+	{% endfor %}
 {% endblock %}

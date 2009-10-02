@@ -26,12 +26,15 @@ class DefaultHandler(baseview):
     '''    Homepage    '''
     def get(self):
         
+        script_list = Script.all()
+                
         tpl = { 
                 'msg' : self.request.get('msg'),
                 'scriptname' : self.request.get('scriptname'),
                 'logged_in'  : (users.get_current_user() is not None),
                 'allowed_user': allowed_user(users.get_current_user()),
-                'home_url'   : 'http://' + self.request.host + "/"
+                'home_url'   : 'http://' + self.request.host + "/",
+                'script_list': script_list
               }
 
         if users.get_current_user() is None:

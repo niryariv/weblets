@@ -147,7 +147,7 @@
 			{% if can_edit %}
 				<input type="text" size="60" id="description" value="{{ script.description }}" name="description">
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Listable 
+				<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Allow this script to be listed in the home page 
 			{% else %}
 				{{script.description|escape}}
 			{% endif %}
