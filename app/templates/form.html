@@ -79,6 +79,16 @@
 			$("#docs-edit").hide();
 		});
 		
+		// save on change
+		$("#description").blur( function() {
+			if ($("#description").val() != '') save();
+		});
+		
+		$("#listable").click( function() {
+			save();
+		});
+		
+		
 		// enable tabs inside textareas
 		$("textarea").tabby();
 		
