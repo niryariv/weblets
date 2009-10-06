@@ -27,8 +27,7 @@ class DefaultHandler(baseview):
     def get(self):
         
         script_list = Script.all()
-        script_list.filter('listable', True)
-        script_list.order('-updated_at')
+        user = users.get_current_user()
         
         tpl = { 
                 'msg' : self.request.get('msg'),
@@ -36,12 +35,16 @@ class DefaultHandler(baseview):
                 'logged_in'  : (users.get_current_user() is not None),
                 'allowed_user': allowed_user(users.get_current_user()),
                 'home_url'   : 'http://' + self.request.host + "/",
-                'script_list': script_list
+                'script_list': script_list,
+                'user'       : user
               }
 
-        if users.get_current_user() is None:
+        if user is None:
             tpl['login_url']  = users.create_login_url('/')
+            tpl['script_list']= Script.all().filter('listable', True).order('-updated_at')
         else:
+            tpl['script_list']= Script.all().filter('listable', True).order('-updated_at')
+            tpl['my_scripts'] = Script.all().filter('created_by', user).order('-updated_at')
             tpl['logout_url'] = users.create_logout_url('/')
         
         self.render_template('index.html', tpl)
