@@ -88,11 +88,11 @@
 			save();
 		});
 		
-		$("#listable").click( function() {
-			save();
-		});
-		
 		$("#code").blur( function() {
+			save();
+		});	
+		
+		$("#listable").click( function() {
 			save();
 		});
 		
@@ -105,20 +105,19 @@
 			save();
 		});
 
-		// // save and execute
-		// $("#run").click(function () { 
-		// 	save( function()(window.location = "/{{script.name}}?" + $("#params").val() ));
-		// });
 
 		// test run locally
-		$("#form").submit(function() {
-			save(function ()(run_script($('#method').val())) );
-			return false;
+		$("#test").click( 
+			function () { 
+				save(
+					function () {
+						run_script($('#method').val())
+					}
+				);
 		});
-		$("#test").click(function () { 
-			save(function ()(run_script($('#method').val())) );
-		});
-
+		
+		
+		// code editor 
 		editor = CodeMirror.fromTextArea('code', {
 			{% if not can_edit %} readOnly: true, {% endif %}
 			parserfile: ["parsepython.js"],
@@ -190,12 +189,10 @@
 	
 	<div id="docs-div">
 		<p>
-			{% if can_edit %}
-				<span id="docs-edit">
-					<textarea id="docs-editbox">{{script.docs}}</textarea>
-					<a href="http://daringfireball.net/projects/markdown/basics" target="_blank"><tt>Markdown Reference</tt></a>
-				</span>
-			{% endif %}
+			<span id="docs-edit">
+				<textarea id="docs-editbox">{{script.docs}}</textarea>
+				<a href="http://daringfireball.net/projects/markdown/basics" target="_blank"><tt>Markdown Reference</tt></a>
+			</span>
 			<span id="docs-text">&nbsp;</span>
 		</p>
 	</div>
