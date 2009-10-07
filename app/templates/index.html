@@ -8,7 +8,7 @@
 	
 			{% if msg %}<p><i>{{ msg }}</i></p>{% endif %}
 	
-			Choose your URL: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
+			Create a new script: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
 			<input type="submit" value="Create" />
 		</form>
 		{% else %}
@@ -18,7 +18,7 @@
 
 <div class="clear"></div>
 
-{% if allowed_user %}
+{% if allowed_user and my_scripts %}
 	<div id="my-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">	
 		<p>
 			<tt><u>Your scripts</u></tt><br />
@@ -29,12 +29,15 @@
 	</div>
 {% endif %}
 
-<div id="recent-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">
-	<p>
-		<tt><u>Recently updated scripts</u></tt><br />
-		{% for s in script_list %}
-			<tt><b><a href="/_source/{{ s.name }}">{{ s.name }}</a></b>&nbsp;:&nbsp;{{ s.description }}</tt><br/>
-		{% endfor %}
-	{% endblock %}
-	</p>
-</div>
+{% if script_list %}
+	<div id="recent-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">
+		<p>
+			<tt><u>Recently updated scripts</u></tt><br />
+			{% for s in script_list %}
+				<tt><b><a href="/_source/{{ s.name }}">{{ s.name }}</a></b>&nbsp;:&nbsp;{{ s.description }}</tt><br/>
+			{% endfor %}
+		</p>
+	</div>
+{% endif %}
+
+{% endblock %}
