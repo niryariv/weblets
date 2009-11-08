@@ -69,20 +69,23 @@
 		html = showdown.makeHtml($("#docs-editbox").val());
 		$("#docs-text").html(html);
 		
-		$("#docs-div").click(function (){
-			$("#docs-edit").show();
-			$("#docs-text").hide();
-			$("#docs-editbox").focus();
-		});
-
-		$("#docs-editbox").blur(function (){
-			save();
-			html = showdown.makeHtml($("#docs-editbox").val());
-			$("#docs-text").html(html);
-			$("#docs-text").show();
-			$("#docs-edit").hide();
-		});
+		{% if can_edit %}
+			$("#docs-div").click(function (){
+				$("#docs-edit").show();
+				$("#docs-text").hide();
+				$("#docs-editbox").focus();
+			});
 		
+			$("#docs-editbox").blur(function (){
+				save();
+				html = showdown.makeHtml($("#docs-editbox").val());
+				$("#docs-text").html(html);
+				$("#docs-text").show();
+				$("#docs-edit").hide();
+			});
+		{% endif %}
+
+
 		// save on change
 		$("#description").blur( function() {
 			save();
