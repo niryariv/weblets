@@ -11,28 +11,23 @@
 
 	function save(callback_func) {
 		{% if can_edit %} 
-		$("#save").html('Saving... <img src="/static/img/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
-		$.post( '/_source/{{script.name}}', 
-						{ 
-								code: editor.getCode(), //$("#code").val(), 
-								docs: $("#docs-editbox").val(),
-								listable: $("#listable").is(':checked'),
-								description: $("#description").val(),
+			$("#save").html('Saving... <img src="/static/img/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
+			$.post( '/_source/{{script.name}}', 
+							{ 
+									code: editor.getCode(), //$("#code").val(), 
+									docs: $("#docs-editbox").val(),
+									listable: $("#listable").is(':checked'),
+									description: $("#description").val(),
 								
-								_method: 'put', 
-								format: 'xhr'
-						},
-						function(){ 
-							$("#save").html("Save"); 
-							callback_func();
-						}
-					);
+									_method: 'put', 
+									format: 'xhr'
+							},
+							function(){ 
+								$("#save").html("Save"); 
+							}
+						);
 		
-			{% else %}
-		
-			callback_func();
-		
-			{% endif %}
+		{% endif %}
 	}
 	
 	function run_script(method) {
@@ -112,11 +107,8 @@
 		// test run locally
 		$("#test").click( 
 			function () { 
-				save(
-					function () {
-						run_script($('#method').val())
-					}
-				);
+				save();
+				run_script($('#method').val());
 		});
 		
 		
