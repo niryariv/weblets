@@ -11,7 +11,8 @@
 
 	function save(callback_func) {
 		{% if can_edit %} 
-			$("#save").html('Saving... <img src="/static/img/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
+			$("#save").html("Saving...");
+			//$("#save").html('Saving... <img src="/static/img/ajax-loader.gif" />'); // GIF created by ever helpful http://ajaxload.info/
 			$.post( '/_source/{{script.name}}', 
 							{ 
 									code: editor.getCode(), //$("#code").val(), 
@@ -23,7 +24,8 @@
 									format: 'xhr'
 							},
 							function(){ 
-								$("#save").html("Save"); 
+								// use setTimeout to make sure the "saving" message is displayed giving feedback to the user, even if the save operation is too fast
+								setTimeout('$("#save").html("Save")', 300);
 							}
 						);
 		
