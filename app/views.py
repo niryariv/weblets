@@ -88,7 +88,12 @@ class SourceHandler(baseview):
             self.redirect("/?%s" % urllib.urlencode({ 'msg' : err, 'scriptname' : scriptname }))
             
         else:        
-            Script(key_name=name_to_key(scriptname), name=scriptname).put()
+            Script(
+                key_name=name_to_key(scriptname), 
+                name=scriptname,
+                docs=config.DOCS_TMPL,
+                code=config.CODE_TMPL
+                ).put()
             self.redirect('/_source/%s' % scriptname)
         
 
