@@ -130,18 +130,20 @@
 
 	});
 
-	// save on Ctrl+S
-	var isCtrl = false; var CTRL_KEY = 17 ; var CMD_KEY = 224 ; var S_KEY = 83 ;
+	// save on Ctrl/Cmd+S
+	var modifier_pressed = false; var CTRL_KEY = 17 ; var CMD_KEY = 224 ; var S_KEY = 83 ;
 
 	$(document).keyup(function (e) { 
-		if(e.which == CTRL_KEY || e.which == CMD_KEY) isCtrl=false; 
-		}).keydown(function (e) {
-			if(e.which == CTRL_KEY || e.which == CMD_KEY) isCtrl=true; 
-			
-			if(e.which == S_KEY && isCtrl == true) { 
-					save();
-					return false; // stop the browser from proceeding to the default ctrl+S action (eg, save the page etc)
-				} 
+		if (e.which == CTRL_KEY || e.which == CMD_KEY) modifier_pressed=false; 
+	})
+		
+	$(document).keydown(function (e) {
+		if (e.which == CTRL_KEY || e.which == CMD_KEY) modifier_pressed=true; 
+		
+		if (e.which == S_KEY && modifier_pressed == true) { 
+			save();
+			return false; // don't propagate to the browser's default ctrl+S action (eg, save the page etc)
+		} 
 	}); 
 		
 	</script>
