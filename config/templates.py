@@ -1,6 +1,4 @@
-ALLOWED_USERS = ['niryariv@gmail.com', 'test@example.com']
-
-CODE_TMPL = '''
+CODE = '''
 
 def get():
     pass
@@ -16,7 +14,7 @@ def delete():
 
 '''
 
-DOCS_TMPL = '''
+DOCS = '''
 **Description**
 
 General description of the script's purpose

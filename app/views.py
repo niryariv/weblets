@@ -6,6 +6,7 @@ from app.lib.utils import *
 from app.lib.wrapper import *
 
 from models import *
+from config import templates as default_tmpl
 
 import urllib
 import logging
@@ -91,8 +92,8 @@ class SourceHandler(baseview):
             Script(
                 key_name=name_to_key(scriptname), 
                 name=scriptname,
-                docs=config.DOCS_TMPL,
-                code=config.CODE_TMPL
+                docs=default_tmpl.DOCS,
+                code=default_tmpl.CODE
                 ).put()
             self.redirect('/_source/%s' % scriptname)
         

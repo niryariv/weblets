@@ -2,7 +2,7 @@ from google.appengine.api import users
 from app.models import *
 
 import urllib
-import config
+import config.allowed_users as allowed_users
 
 # def require_login(url):
 #     if users.get_current_user() is None:
@@ -38,8 +38,10 @@ def scriptname_error(scriptname):
     
     
 def allowed_user(user):
+    #return True
+
     try:
-        i = config.ALLOWED_USERS.index(user.email().lower())
+        i = allowed_users.ALLOWED_USERS.index(user.email().lower())
         return True
     except:
         return False
