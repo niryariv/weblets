@@ -3,7 +3,23 @@
 {% block body %}
 
 <p>
-		{% if allowed_user %}
+	<b>Weblets are tiny web apps</b>, written in Python and running on the Google App Engine. 
+	They don't require installing an editor or plugins - you can create, edit and run Weblets <b>using only a web browser</b>.
+</p>
+<p>
+	For people new to programming, <b>Weblets help learn</b> about Python and web programming by providing a <b>simple, safe and free way to experiment</b>. 
+	For more experienced developers, Weblets provide a way to <b>instantly get short mini-apps online</b>, using only a browser.
+</p>
+
+<p>Each weblet gets its own address, for example <tt><a href="/helloworld">http://qkhack.appspot.com/helloworld</a></tt>. You can <b>see the source code and documentation 
+for any weblet</b>, and edit it if you're its creator, but simply prepending <tt>/_source</tt> to its path - for example, 
+<tt><a href="/_source/helloworld">http://qkhack.appspot.com/_source/helloworld</a></tt>
+
+<p>
+		{% if not allowed_user %}
+			Anyone can view any weblet, but at the moment only authorized users can create them. 
+			<b>To be added to the authorized users list, email <a href="mailto:niryariv@gmail.com">niryariv@gmail.com</a></b>
+		{% else %}
 		<form action="/_source/c" method="post">
 	
 			{% if msg %}<p><i>{{ msg }}</i></p>{% endif %}
@@ -11,8 +27,6 @@
 			Create a new script: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
 			<input type="submit" value="Create" />
 		</form>
-		{% else %}
-		<!-- To get an account and create your own scripts, email niryariv@gmail.com -->
 		{% endif %}
 </p>
 
