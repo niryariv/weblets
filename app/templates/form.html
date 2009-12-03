@@ -113,6 +113,10 @@
 				run_script($('#method').val());
 		});
 		
+		$("#new-window").click(
+			function () { 
+				save();
+		});
 		
 		// code editor 
 		editor = CodeMirror.fromTextArea('code', {
@@ -168,6 +172,8 @@
 
 	<div id="button-bar">
 		<p>
+			<a href="/{{script.name}}" target="_weblets_preview" id="new-windown"><img src="/static/img/external.png" />&nbsp;Open in new window</a>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button id="save" type="button" {% if not can_edit %}disabled="true"{% endif %}>Save</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<select name="method" id="method">
@@ -177,9 +183,7 @@
 				<option>DELETE</option>
 			</select>
 			<tt>/{{script.name}}?</tt><input type="text" size="20" id="params">
-			<button type="button" id="test" />Save &amp; Run</button>
-			<button type="button" id="run" /><img src="/static/img/external.png" /></button>
-			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" id="test" />Test</button>
 		</p>
 	</div>
 

@@ -16,6 +16,10 @@ input {
     background-color: #ffffd0;
 }
 
+img {
+    border: none;
+}
+
 .clear{ clear:both; }
 
 .CodeMirror-line-numbers {
