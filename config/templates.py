@@ -23,16 +23,16 @@ def delete():
 DOCS = '''
 **Description**
 
-General description of the script's purpose
-
+Hello World demo weblet.
 
 **Params**
 
-	param_name	Paramater description
+	msg (optional) Message to display. If not present, display intro text)
 
 
 **Examples**
 
-* <http://example/url>
+* <http://qkhack.appspot.com/helloworld>
+* <http://qkhack.appspot.com/helloworld?msg=hey>
 
 '''
