@@ -24,7 +24,7 @@ for any weblet</b>, and edit it if you're its creator, but simply prepending <tt
 	
 			{% if msg %}<p><i>{{ msg }}</i></p>{% endif %}
 	
-			Create a new script: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
+			Create a new weblet: <tt>{{ home_url }}</tt><input type="text" size="20" name="scriptname" value="{{scriptname}}" />
 			<input type="submit" value="Create" />
 		</form>
 		{% endif %}
@@ -35,7 +35,7 @@ for any weblet</b>, and edit it if you're its creator, but simply prepending <tt
 {% if allowed_user and my_scripts %}
 	<div id="my-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">	
 		<p>
-			<tt><u>Your scripts</u></tt><br />
+			<tt><u>Your weblets</u></tt><br />
 			{% for s in my_scripts %}
 				<tt><b><a href="/_source/{{ s.name }}">{{ s.name }}</a></b>&nbsp;:&nbsp;{{ s.description }}</tt><br/>
 			{% endfor %}
@@ -46,7 +46,7 @@ for any weblet</b>, and edit it if you're its creator, but simply prepending <tt
 {% if script_list %}
 	<div id="recent-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">
 		<p>
-			<tt><u>Recently updated scripts</u></tt><br />
+			<tt><u>Recently updated weblets</u></tt><br />
 			{% for s in script_list %}
 				<tt><b><a href="/_source/{{ s.name }}">{{ s.name }}</a></b>&nbsp;:&nbsp;{{ s.description }}</tt><br/>
 			{% endfor %}
