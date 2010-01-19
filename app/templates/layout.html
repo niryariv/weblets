@@ -1,14 +1,15 @@
 <html>
 <head>
 	<title>Weblets</title>
-	<link href="/static/css/layout.css" rel="stylesheet" type="text/css" />
+	<link href="/static/css/new_layout.css" rel="stylesheet" type="text/css" />
 		
 	{% block head %}{% endblock %}
 </head>
 <body>
-	<div class="main">		
+	{% block toc %}{% endblock %}
+	<div id="content" class="main">		
 		<div id="topbar">
-			<span style="font-size: 30px"><a href="/">Weblets</a></span> <span style="font-size: 12px">are nice</span>
+			<span style="font-size: 30px"><a href="/">Weblets</a></span>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			({% if logged_in %}<a href="{{logout_url}}" />log out</a> {{ user }}{% else %}<a href="{{login_url}}" />log in</a>{% endif %})
 		</div>
