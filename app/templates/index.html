@@ -30,10 +30,10 @@ for any weblet</b>, and edit it if you're its creator, but simply prepending <tt
 		{% endif %}
 </p>
 
-<div class="clear"></div>
+<!-- <div class="clear"></div> -->
 
 {% if allowed_user and my_scripts %}
-	<div id="my-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">	
+	<div id="my-scripts">	
 		<p>
 			<tt><u>Your weblets</u></tt><br />
 			{% for s in my_scripts %}
@@ -44,7 +44,7 @@ for any weblet</b>, and edit it if you're its creator, but simply prepending <tt
 {% endif %}
 
 {% if script_list %}
-	<div id="recent-scripts" style="display: inline; *margin-right:-1px; float: left; width: 40%">
+	<div id="recent-scripts"> <!-- style="display: inline; *margin-right:-1px; float: left; width: 40%"> -->
 		<p>
 			<tt><u>Recently updated weblets</u></tt><br />
 			{% for s in script_list %}
