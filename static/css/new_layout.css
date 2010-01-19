@@ -1,3 +1,4 @@
+/* node.js */
 body {
   background: #22252a;
   color: #eee;
@@ -43,7 +44,7 @@ img {
 
 h1, h2, h3, h4 {
   color: #B0C4DE;
-  margin: 2em 0; 
+  margin: 1em 0; 
 }
 
 h1 code, h2 code, h3 code, h4 code, 
@@ -77,41 +78,7 @@ a:hover { text-decoration: underline; }
   padding: 0.2em 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*#code-div { 
-    height: 450px;
-}
-#docs-div {
-    width: 40%; 
-    height: 450px;
-}
-*/
-#spacer {
-    width:15px; 
-    float:left; 
-    display: inline; 
-    *margin-right:-1px;     
-}
-
-
-#test-div {
-    width: 90%; 
-    height: 450px;
-    float: left; 
-    display: inline; 
-    *margin-right:-1px; 
-}
-
+/* /node.js */
 
 #docs-editbox { 
     width:100%;
