@@ -11,6 +11,7 @@ from config import templates as default_tmpl
 import urllib
 import logging
 import sys
+import cgi
 
 class ImportTest(baseview):
     def get(self):
@@ -149,12 +150,12 @@ class RunHandler(baseview):
         code = prefix + code + "\n\n" + method + "()"
 
 
-        exec code in namespace
-        # try:
-        #     exec code in namespace
-        # except Exception, err:
-        #     self.error(500)
-        #     self.render("ERROR %s \n" % err)
+        # exec code in namespace
+        try:
+            exec code in namespace
+        except Exception, err:
+            self.error(500)
+            self.render(cgi.escape("ERROR %s \n" % err))
         
         
     def get(self, scriptname):
