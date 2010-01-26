@@ -223,7 +223,10 @@
 	<!-- <div id="spacer">&nbsp;</div> -->
 
 	<div id="docs-div">
-		<h2>Documentation</h2>
+		<h2>
+			Documentation
+			{% if can_edit %}<span style="font-size: 50%;">(Click to edit)</span>{% endif %}
+		</h2>
 		<p>
 			<span id="docs-edit">
 				<textarea id="docs-editbox">{{script.docs}}</textarea>
