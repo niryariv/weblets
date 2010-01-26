@@ -52,7 +52,7 @@
 	
 	function display_test(xhr, status){
 		$("#test-div").show(400);		
-		$("#results-display").html(xhr.responseText)
+		$("#results-display").val(xhr.responseText)
 	}
 
 	$(document).ready(function(){
