@@ -4,7 +4,7 @@ body {
   color: #eee;
   font-size: 14pt;
   line-height: 150%;
-  font-family: times, Times New Roman, times-roman, georgia, serif; 
+  font-family: georgia, helvetica; /*times, Times New Roman, times-roman, georgia, serif; */
   max-width: 40em;
   margin: 2em 0 5em 9em;
 }
@@ -88,4 +88,12 @@ a:hover { text-decoration: underline; }
 #results-display { 
     width:100%;
     height:95%;
+}
+
+.docs{
+  width: 100%;
+  padding: 10px;
+  font-family: monospace;
+/*  border: 1px coral solid;*/
+  background: #32353a;
 }

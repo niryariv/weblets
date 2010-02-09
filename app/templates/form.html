@@ -72,7 +72,7 @@
 		$("#docs-text").html(html);
 		
 		{% if can_edit %}
-			$("#docs-div").click(function (){
+			$(".docs").click(function (){
 				$("#docs-edit").show();
 				$("#docs-text").hide();
 				$("#docs-editbox").focus();
@@ -177,22 +177,24 @@
 
 	<div>
 		<p>
-			<span style="font-size: 20px"><tt>{{script.name}}</tt></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<!-- <span style="font-size: 20px"><tt>{{script.name}}</tt></span>&nbsp;&nbsp;&nbsp;&nbsp; -->
+			<a href="/{{script.name}}" target="_weblets_preview" id="new-windown"><tt style="font-size: 75%"><span style="font-size: 20px"><tt>{{script.name}}</tt></span>&nbsp;<img src="/static/img/external.png" /></tt></a>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			{% if can_edit %}
-				<input type="text" size="60" id="description" value="{{ script.description }}" name="description" title="Enter a description for this weblet">
+				<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />
+				<span style="font-size: 0.7em"><tt>Allow this script to be listed in the home page</tt></span>
 				<br />
-				<input type="checkbox" id="listable" name="listable" {% if script.listable %}checked{% else %}unchecked{% endif %} />Allow this script to be listed in the home page 
+				<input type="text" size="60" id="description" value="{{ script.description }}" name="description" title="Enter a description for this weblet">
 			{% else %}
-				{{script.description|escape}}
+				<br />
+				"{{script.description|escape}}"
 			{% endif %}
 		</p>
 	</div>
 
 	<div id="button-bar">
 		<p>
-			<a href="/{{script.name}}" target="_weblets_preview" id="new-windown"><img src="/static/img/external.png" />&nbsp;Open in new window</a>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button id="save" type="button" {% if not can_edit %}disabled="true"{% endif %}>Save</button>
+			{% if can_edit %}<button id="save" type="button" >Save</button>{% endif %}
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<select name="method" id="method">
 				<option selected="selected">GET</option>
@@ -211,7 +213,7 @@
 	</div>
 
 	<div id="code-div">
-		<h2>Code</h2>
+		<h2><u>Code</u></h2>
 		<p>
 			<input type="hidden" name="_method" value="put" />
 			<textarea name="code" id="code">{{script.code}}</textarea>
@@ -224,10 +226,10 @@
 
 	<div id="docs-div">
 		<h2>
-			Documentation
-			{% if can_edit %}<span style="font-size: 50%;">(Click to edit)</span>{% endif %}
+			<u>Documentation</u>
+			{% if can_edit %}<span style="font-size: 50%;">(Click inside to edit)</span>{% endif %}
 		</h2>
-		<p>
+		<p class="docs">
 			<span id="docs-edit">
 				<textarea id="docs-editbox">{{script.docs}}</textarea>
 				<a href="http://daringfireball.net/projects/markdown/basics" target="_blank"><tt>Markdown Reference</tt></a>
